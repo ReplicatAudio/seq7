@@ -36,14 +36,21 @@ While the tick loop is running, `seq7` calls the last-loaded script's `tickfn` o
 
 ## Scheme API
 
+### Core
+
 | Function | Description |
 |---|---|
+| `(tickfn)` | Called every tick when the loop is running — define this in your script (default: 1ms) |
+| `(set-tick-speed ms)` | Set tick interval in milliseconds (minimum 1) |
 | `(raw-midi-write bytes)` | Sends a list of bytes to the virtual MIDI port |
+
+### Extras
+
+| Function | Description |
+|---|---|
 | `(log-raw bytes)` | Prints a hex dump of bytes to the terminal (only while `dbg` is on) |
 | `(display ...)` | Standard Scheme display; silenced while `dbg` is off |
 | `(newline)` | Standard Scheme newline, rewritten to write `\r\n` for raw mode; silenced while `dbg` is off |
-| `(tickfn)` | Called every tick when the loop is running — define this in your script (default: 1ms) |
-| `(set-tick-speed ms)` | Set tick interval in milliseconds (minimum 1) |
 
 ### steel/random builtins
 
@@ -53,21 +60,44 @@ While the tick loop is running, `seq7` calls the last-loaded script's `tickfn` o
 
 Library helpers are provided in `scm/lib/`; load them all with `(load "scm/lib/lib.scm")`.
 
+A minimal script needs no explicit setup beyond the core functions:
+
+```scheme
+(load "scm/lib/lib.scm")
+
+(set-tick-speed 250)
+
+(define t 0)
+
+(define (tickfn)
+  (midi-note-on 0 (modulo (+ t 21) 60) 127)
+  (set! t (+ 1 t)))
+```
+
+Run it with `cargo run -- scm/simple.scm`, then press **Enter** on an empty line to start the tick loop.
+
 ## Lua API
 
 Scripts ending in `.lua` run on a Lua 5.4 VM that coexists with the Scheme engine (everything without a `.lua` extension is Scheme). `load <file>` and the `cargo run <script>` argument pick the language by file extension, and the tick loop calls whichever `tickfn` the last-loaded script defined — define `function tickfn() ... end` in a `.lua` file exactly like `(define (tickfn) ...)` in Scheme.
 
-| Lua global | Scheme equivalent | Description |
-|---|---|---|
-| `raw_midi_write(...)` | `(raw-midi-write bytes)` | Sends one byte per vararg to the virtual MIDI port — e.g. `raw_midi_write(0x91, 60, 100)` sends Note On, channel 2, note 60, velocity 100. Byte values must be in 0–255. |
-| `log_raw(...)` | `(log-raw bytes)` | Prints a hex dump of the bytes (only while `dbg` is on) |
-| `set_tick_speed(ms)` | `(set-tick-speed ms)` | Set tick interval in milliseconds (minimum 1) |
-| `print(...)` / `io.write(...)` | `(display ...)` / `(newline)` | Console output; silenced while `dbg` is off (best-effort, like the Scheme console port) |
+### Core
+
+| Global | Description |
+|---|---|
+| `tickfn()` | Called every tick when the loop is running — define this in your script (default: 1ms) |
+| `set_tick_speed(ms)` | Set tick interval in milliseconds (minimum 1) |
+| `raw_midi_write(...)` | Sends MIDI bytes to the virtual port, one byte per vararg |
+
+### Extras
+
+| Global | Description |
+|---|---|
+| `log_raw(...)` | Prints a hex dump of the bytes (only while `dbg` is on) |
+| `print(...)` / `io.write(...)` | Console output; silenced while `dbg` is off (best-effort, like the Scheme console port) |
 
 `tickfn` and `set_tick_speed` are available at load time, so a `.lua` script needs no explicit setup:
 
 ```lua
--- lua/tick.lua
 dofile("lua/lib/lib.lua")
 
 set_tick_speed(250)

@@ -1,3 +1,9 @@
+;; Algae Lamp - L-system driven sequence
+;; Channels:
+;; kick
+;; snare
+;; synth1
+;; synth2
 (load "scm/lib/lib.scm")
 
 ;; From https://en.wikipedia.org/wiki/L-system

@@ -1,6 +1,11 @@
--- Direct port of scm/lsys3.scm (L-system drum pattern + two
--- melody sequencers driven by the same string), using the Lua libs instead
--- of inlined helpers.
+-- Algae Lamp - L-system driven sequence
+-- Channels:
+-- kick
+-- snare
+-- synth1
+-- synth2
+--
+-- Direct port of scm/algae-lamp.scm (L-system drum pattern + two
 dofile("lua/lib/lib.lua")
 
 set_tick_speed(150)
@@ -79,4 +84,3 @@ function tickfn()
 
   t = t + 1
 end
-
