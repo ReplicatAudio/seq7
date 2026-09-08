@@ -1,5 +1,8 @@
 {
   "runtime.version": "Lua 5.4",
+  "diagnostics.disable": [
+    "lowercase-global"
+  ],
   "diagnostics.globals": [
     "raw_midi_write",
     "log_raw",

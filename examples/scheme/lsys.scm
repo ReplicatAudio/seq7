@@ -22,7 +22,7 @@
 
 (set-tick-speed 150)
 (define tt 0)
-(define (tick)
+(define (tickfn)
   (define v (list-ref lout (modulo tt (length lout))))
   (debug v)
   (cond

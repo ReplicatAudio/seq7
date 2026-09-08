@@ -45,7 +45,7 @@
 (define lfo-pos 0)
 
 ; --- main tick ---
-(define (tick)
+(define (tickfn)
   (set! t (+ t 1))
 
   ; --- CC 1: mod wheel LFO (triangle, period 512 ticks ≈ 20s) ---

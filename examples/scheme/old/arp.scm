@@ -13,7 +13,7 @@
 (define (note-off note)
   (raw-midi-write (list #x80 note 0)))
 
-(define (tick)
+(define (tickfn)
   (when (= (modulo tick-count 1000) 0)
   (display tick-count)
   (newline))

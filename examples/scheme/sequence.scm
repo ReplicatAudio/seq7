@@ -67,7 +67,7 @@ r r r r r r 1 1
 (define tt 0)
 (define mode 2)
 
-(define (tick)
+(define (tickfn)
   (if (= t 0) (midi-start))
   (when (= (modulo t 8) 0)
     (midi-clock)

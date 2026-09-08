@@ -43,7 +43,7 @@ end
 
 local t = 0
 
-function tick()
+function tickfn()
   if t == 0 then midi_start() end
   if t % 8 == 0 then midi_clock() end
 

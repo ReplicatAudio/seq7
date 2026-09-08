@@ -30,7 +30,7 @@ end
 
 local t = 0
 
-function tick()
+function tickfn()
   print(t)
   if t == 0 then
     kick  = kick1

@@ -42,7 +42,7 @@
     (set! step 0)
     (set! play-count (+ play-count 1))))
 
-(define (tick)
+(define (tickfn)
   (set! t (+ t 1))
   (when (= (modulo t 3) 0)
     (cond

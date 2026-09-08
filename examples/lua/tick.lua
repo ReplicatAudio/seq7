@@ -6,7 +6,7 @@ set_tick_speed(250)
 
 local t = 0
 
-function tick()
+function tickfn()
   midi_note_on(0, 21 + t % 60, 127)
   t = t + 1
 end

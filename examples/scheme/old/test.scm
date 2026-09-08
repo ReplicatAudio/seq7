@@ -5,7 +5,7 @@
 (define t 0)
 (define n 40)
 
-(define (tick)
+(define (tickfn)
     (set! t (+ 1 t))
     (set! n (+ 1 n))
     (n-on 1 n 127)

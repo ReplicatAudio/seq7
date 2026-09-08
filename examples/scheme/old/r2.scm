@@ -29,7 +29,7 @@
 (set! B (gen))
 (set! T A)
 
-(define (tick)
+(define (tickfn)
   (set! t (+ t 1))
 
   (raw-midi-write (list #x80 note 80))

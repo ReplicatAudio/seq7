@@ -7,7 +7,7 @@
 (define current-note #f)
 (define pentatonic (list 60 62 64 67 69 72 74 76 79 81))
 
-(define (tick)
+(define (tickfn)
   (set! tick-count (+ tick-count 1))
   (when (= (modulo tick-count 200) 0)
     (when current-note

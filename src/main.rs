@@ -82,7 +82,7 @@ fn load_lua_file(lua: &mut Lua, path: &str) {
 
 /// Load a script, picking the language by extension: `.lua` → Lua,
 /// everything else → Scheme. Records the choice in `lang` so the tick loop
-/// calls the matching `tick`.
+/// calls the matching `tickfn`.
 fn load_file(engine: &mut Engine, lua: &mut Lua, lang: &mut Lang, path: &str) {
     if path.ends_with(".lua") {
         *lang = Lang::Lua;
@@ -552,18 +552,18 @@ io.write = function(...) w(table.concat({...})) end
                         }
                     }
 
-                    // The last-loaded script's extension decides which `tick`
+                    // The last-loaded script's extension decides which `tickfn`
                     // runs: a Lua function for .lua files, a Scheme function
                     // for everything else. Errors stop the loop either way.
                     let tick_result: Result<(), String> = match lang {
                         Lang::Scheme => {
-                            match engine.call_function_by_name_with_args("tick", vec![]) {
+                            match engine.call_function_by_name_with_args("tickfn", vec![]) {
                                 Ok(_) => Ok(()),
                                 Err(e) => Err(e.to_string()),
                             }
                         }
-                        Lang::Lua => match lua.globals().get::<LuaFunction>("tick") {
-                            Ok(tick) => tick.call::<()>(()).map_err(|e| e.to_string()),
+                        Lang::Lua => match lua.globals().get::<LuaFunction>("tickfn") {
+                            Ok(tick_fn) => tick_fn.call::<()>(()).map_err(|e| e.to_string()),
                             Err(e) => Err(e.to_string()),
                         },
                     };

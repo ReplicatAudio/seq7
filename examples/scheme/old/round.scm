@@ -17,7 +17,7 @@
 (define note1 #f)
 (define note2 #f)
 
-(define (tick)
+(define (tickfn)
   (set! t (+ t 1))
 
   ; voice 1 — ascends, steps every 3 ticks

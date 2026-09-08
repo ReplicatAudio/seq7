@@ -30,7 +30,7 @@
 
 (define t 0)
 
-(define (tick)
+(define (tickfn)
   (sequencer 0 seq1 48 0 1 127 t)
   (sequencer 1 seq2 36 0 1 127 t)
   (set! t (+ 1 t))

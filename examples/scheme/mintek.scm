@@ -31,7 +31,7 @@
   )
 )
 
-(define (tick)
+(define (tickfn)
   (debug (number->string t))
   (when (= t 0)
     (set! kick kick1)

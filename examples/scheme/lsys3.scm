@@ -29,7 +29,7 @@
 
 (set-tick-speed 150)
 (define tt 0)
-(define (tick)
+(define (tickfn)
   (if (= tt 0) (midi-start))
   (when (= (modulo tt 8) 0)
     (midi-clock)

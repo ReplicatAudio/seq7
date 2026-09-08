@@ -4,7 +4,7 @@
 
 (define tick-count 0)
 
-(define (tick)
+(define (tickfn)
   (set! tick-count (+ tick-count 1))
   (let* ((pos (modulo tick-count 256))
          (val (if (< pos 128) pos (- 255 pos))))

@@ -73,7 +73,7 @@
     )
 )
 
-(define (tick)
+(define (tickfn)
   (when (< acc4 5) (f1))
   (when (>= acc4 5) (f2))
   (when (>= acc4 10) 

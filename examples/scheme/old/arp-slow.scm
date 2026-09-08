@@ -11,7 +11,7 @@
 (define current-note #f)
 (define notes (list 60 64 67 72 65 69 71 60))
 
-(define (tick)
+(define (tickfn)
   (when current-note
     (raw-midi-write (list #x80 current-note 0)))
   (set! current-note (list-ref notes step))

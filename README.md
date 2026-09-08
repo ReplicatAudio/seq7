@@ -32,7 +32,7 @@ Anything else at the command prompt (e.g. raw Scheme text) is rejected with `unk
 
 In `scheme`, type Scheme expressions and press Enter to evaluate them. In `lua`, type Lua expressions or statements (see Lua API below).
 
-While the tick loop is running, `seq7` calls the last-loaded script's `tick` on every tick (1ms by default, adjustable with `set-tick-speed`) — `(define (tick) ...)` in Scheme, `function tick() ... end` in Lua. Use `raw-midi-write` / `raw_midi_write` to send MIDI bytes to the virtual port.
+While the tick loop is running, `seq7` calls the last-loaded script's `tickfn` on every tick (1ms by default, adjustable with `set-tick-speed`) — `(define (tickfn) ...)` in Scheme, `function tickfn() ... end` in Lua. Use `raw-midi-write` / `raw_midi_write` to send MIDI bytes to the virtual port.
 
 ## Scheme API
 
@@ -42,7 +42,7 @@ While the tick loop is running, `seq7` calls the last-loaded script's `tick` on 
 | `(log-raw bytes)` | Prints a hex dump of bytes to the terminal (only while `dbg` is on) |
 | `(display ...)` | Standard Scheme display; silenced while `dbg` is off |
 | `(newline)` | Standard Scheme newline, rewritten to write `\r\n` for raw mode; silenced while `dbg` is off |
-| `(tick)` | Called every tick when the loop is running — define this in your script (default: 1ms) |
+| `(tickfn)` | Called every tick when the loop is running — define this in your script (default: 1ms) |
 | `(set-tick-speed ms)` | Set tick interval in milliseconds (minimum 1) |
 
 ### steel/random builtins
@@ -55,7 +55,7 @@ Library helpers are provided in `lib/scheme/`; load them all with `(load "lib/sc
 
 ## Lua API
 
-Scripts ending in `.lua` run on a Lua 5.4 VM that coexists with the Scheme engine (everything without a `.lua` extension is Scheme). `load <file>` and the `cargo run <script>` argument pick the language by file extension, and the tick loop calls whichever `tick` the last-loaded script defined — define `function tick() ... end` in a `.lua` file exactly like `(define (tick) ...)` in Scheme.
+Scripts ending in `.lua` run on a Lua 5.4 VM that coexists with the Scheme engine (everything without a `.lua` extension is Scheme). `load <file>` and the `cargo run <script>` argument pick the language by file extension, and the tick loop calls whichever `tickfn` the last-loaded script defined — define `function tickfn() ... end` in a `.lua` file exactly like `(define (tickfn) ...)` in Scheme.
 
 | Lua global | Scheme equivalent | Description |
 |---|---|---|
@@ -64,7 +64,7 @@ Scripts ending in `.lua` run on a Lua 5.4 VM that coexists with the Scheme engin
 | `set_tick_speed(ms)` | `(set-tick-speed ms)` | Set tick interval in milliseconds (minimum 1) |
 | `print(...)` / `io.write(...)` | `(display ...)` / `(newline)` | Console output; silenced while `dbg` is off (best-effort, like the Scheme console port) |
 
-`tick` and `set_tick_speed` are available at load time, so a `.lua` script needs no explicit setup:
+`tickfn` and `set_tick_speed` are available at load time, so a `.lua` script needs no explicit setup:
 
 ```lua
 -- examples/lua/tick.lua
@@ -74,7 +74,7 @@ set_tick_speed(250)
 
 local t = 0
 
-function tick()
+function tickfn()
   midi_note_on(0, 21 + t % 60, 127)   -- Lua % is 0-based → notes 21..80
   t = t + 1
 end

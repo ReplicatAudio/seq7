@@ -13,7 +13,7 @@
 (define (seq notes interval)
   (list-ref notes (modulo interval (length notes))))
 
-(define (tick)
+(define (tickfn)
     (set! t (+ 1 t))
     (define bassn (mode-get 0 0 (+ 21 (seq bass t))))
     (n-on 0 bassn 127)

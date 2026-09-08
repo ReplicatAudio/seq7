@@ -32,7 +32,7 @@ local seq2 = string_split_space_line([[
 
 local t = 0
 
-function tick()
+function tickfn()
   sequencer(0, seq1, 48, 0, 1, 127, t)
   sequencer(1, seq2, 36, 0, 1, 127, t)
   t = t + 1

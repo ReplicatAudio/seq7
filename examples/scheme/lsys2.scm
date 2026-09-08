@@ -41,7 +41,7 @@
 
 (set-tick-speed 125)
 (define tt 0)
-(define (tick)
+(define (tickfn)
   ;; Send clock
   (when (= (modulo tt 8) 0)
     (midi-clock)
