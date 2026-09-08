@@ -1,6 +1,6 @@
--- Direct port of examples/scheme/sequence2.scm (melody + bass sequenced
+-- Direct port of scm/sequence2.scm (melody + bass sequenced
 -- from step patterns), using the Lua libs instead of inlined helpers.
-dofile("lib/lua/lib.lua")
+dofile("lua/lib/lib.lua")
 
 set_tick_speed(150)
 

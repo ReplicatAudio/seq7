@@ -1,5 +1,5 @@
--- Direct port of examples/scheme/time.scm.
-dofile("lib/lua/lib.lua")
+-- Direct port of scm/time.scm.
+dofile("lua/lib/lib.lua")
 
 set_tick_speed(150)
 

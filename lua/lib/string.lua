@@ -1,4 +1,4 @@
--- String helpers (port of lib/scheme/string.scm). Mimics the Scheme
+-- String helpers (port of scm/lib/string.scm). Mimics the Scheme
 -- semantics exactly: consecutive delimiters produce empty strings, and the
 -- split is character-based on the literal delimiter.
 

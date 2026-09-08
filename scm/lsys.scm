@@ -1,4 +1,4 @@
-(load "lib/scheme/lib.scm")
+(load "scm/lib/lib.scm")
 
 ;; From https://en.wikipedia.org/wiki/L-system
 (define algae (list 

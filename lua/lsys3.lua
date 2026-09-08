@@ -1,11 +1,11 @@
--- Direct port of examples/scheme/lsys3.scm (L-system drum pattern + two
+-- Direct port of scm/lsys3.scm (L-system drum pattern + two
 -- melody sequencers driven by the same string), using the Lua libs instead
 -- of inlined helpers.
-dofile("lib/lua/lib.lua")
+dofile("lua/lib/lib.lua")
 
 set_tick_speed(150)
 
--- Same rewrite-set layout as lib/lua/lsystem.lua: index 1 = axiom, then
+-- Same rewrite-set layout as lua/lib/lsystem.lua: index 1 = axiom, then
 -- rule pairs (symbol, replacement); "?" = unused rule.
 local rset = {
   "a",       -- axiom

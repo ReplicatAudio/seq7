@@ -1,8 +1,8 @@
--- Modal helpers (port of lib/scheme/modal.scm).
+-- Modal helpers (port of scm/lib/modal.scm).
 
 -- Mode tables: 0=Ionian, 1=Dorian, 2=Phrygian, 3=Lydian,
 --              4=Mixolydian, 5=Aeolian, 6=Locrian
--- Each row is the semitone offsets for degrees 1..7 (same as lib/scheme/modal.scm).
+-- Each row is the semitone offsets for degrees 1..7 (same as scm/lib/modal.scm).
 local modes = {
   {0, 2, 4, 5, 7, 9, 11},  -- 0=Ionian
   {0, 2, 3, 5, 7, 9, 10},  -- 1=Dorian
@@ -22,7 +22,7 @@ local pentatonic_modes = {
 }
 
 -- 1-based interval; degree/octave derived with Lua's 0-based floor modulo
--- (same math as lib/scheme/modal.scm).
+-- (same math as scm/lib/modal.scm).
 -- modal(0, 0, 1)  => 0   ; C Ionian tonic
 -- modal(0, 0, 3)  => 4   ; C Ionian 3rd
 function modal(root, mode, interval)

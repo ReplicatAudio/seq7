@@ -1,4 +1,4 @@
--- L-system engine (port of lib/scheme/lsystem.scm).
+-- L-system engine (port of scm/lib/lsystem.scm).
 
 --- Apply the rewrite rules to one symbol.
 -- rset layout (same as the Scheme version): index 1 = axiom, then rule

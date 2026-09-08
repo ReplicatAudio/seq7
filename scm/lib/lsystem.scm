@@ -1,4 +1,4 @@
-(load "lib/scheme/flatten.scm")
+(load "scm/lib/flatten.scm")
 
 (define (mapfn c rset)
   (define (rule t) (string=? c t))

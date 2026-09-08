@@ -1,4 +1,4 @@
--- MIDI helpers (port of lib/scheme/midi.scm). Requires the seq7 Lua API
+-- MIDI helpers (port of scm/lib/midi.scm). Requires the seq7 Lua API
 -- global raw_midi_write.
 
 function midi_note_on(ch, note, vel)

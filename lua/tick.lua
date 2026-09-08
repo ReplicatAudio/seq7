@@ -1,6 +1,6 @@
--- Direct port of examples/scheme/simple.scm, exercising the Lua libs:
+-- Direct port of scm/simple.scm, exercising the Lua libs:
 -- Lua's % is 0-based, so notes run 21..80 (vs Scheme's 1-based modulo).
-dofile("lib/lua/lib.lua")
+dofile("lua/lib/lib.lua")
 
 set_tick_speed(250)
 

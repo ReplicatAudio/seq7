@@ -1,4 +1,4 @@
-(load "lib/scheme/lib.scm")
+(load "scm/lib/lib.scm")
 
 (define x "
 a a a

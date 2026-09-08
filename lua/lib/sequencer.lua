@@ -1,6 +1,6 @@
--- Step sequencer (port of lib/scheme/sequencer.scm). Depends on the globals
--- provided by lib/lua/midi.lua and lib/lua/modal.lua; load them first (see
--- lib/lua/lib.lua).
+-- Step sequencer (port of scm/lib/sequencer.scm). Depends on the globals
+-- provided by lua/lib/midi.lua and lua/lib/modal.lua; load them first (see
+-- lua/lib/lib.lua).
 
 -- Per-channel state: the note currently sounding on each channel, or nil.
 -- sequencer releases the previous note on every step so patterns don't

@@ -13,8 +13,8 @@ cargo run [script.scm | script.lua]
 With a path argument, the script is loaded automatically before showing the command prompt; the language is picked by file extension (`.lua` → Lua, anything else → Scheme). Examples:
 
 ```
-cargo run -- examples/scheme/simple.scm
-cargo run -- examples/lua/tick.lua
+cargo run -- scm/simple.scm
+cargo run -- lua/tick.lua
 ```
 
 This opens a command prompt with full readline support (line editing, history via up/down arrows, Ctrl-A/E/U/W/K, etc.):
@@ -51,7 +51,7 @@ While the tick loop is running, `seq7` calls the last-loaded script's `tickfn` o
 
 ### Scheme libraries
 
-Library helpers are provided in `lib/scheme/`; load them all with `(load "lib/scheme/lib.scm")`.
+Library helpers are provided in `scm/lib/`; load them all with `(load "scm/lib/lib.scm")`.
 
 ## Lua API
 
@@ -67,8 +67,8 @@ Scripts ending in `.lua` run on a Lua 5.4 VM that coexists with the Scheme engin
 `tickfn` and `set_tick_speed` are available at load time, so a `.lua` script needs no explicit setup:
 
 ```lua
--- examples/lua/tick.lua
-dofile("lib/lua/lib.lua")
+-- lua/tick.lua
+dofile("lua/lib/lib.lua")
 
 set_tick_speed(250)
 
@@ -80,11 +80,11 @@ function tickfn()
 end
 ```
 
-Run it with `cargo run -- examples/lua/tick.lua`, then press **Enter** on an empty line to start the tick loop.
+Run it with `cargo run -- lua/tick.lua`, then press **Enter** on an empty line to start the tick loop.
 
 The `lua` command at the prompt enters a live Lua REPL (`scheme` returns to the command prompt). Each line is evaluated as an expression (printing its value when non-nil) or run as a statement. Note standard Lua semantics: `local` variables don't survive across REPL lines.
 
-Libraries are provided in `lib/lua/`; load them all with `dofile("lib/lua/lib.lua")` (the Scheme and Lua library trees are independent — each language has its own VM, global environment, and libraries). Editor users on the Lua language server get the seq7 API globals declared in [`.luarc.json`](./.luarc.json).
+Libraries are provided in `lua/lib/`; load them all with `dofile("lua/lib/lib.lua")` (the Scheme and Lua library trees are independent — each language has its own VM, global environment, and libraries). Editor users on the Lua language server get the seq7 API globals declared in [`.luarc.json`](./.luarc.json).
 
 Scheme's helpers are not available to Lua scripts, and vice versa.
 
@@ -114,7 +114,7 @@ aconnect seq7:0 <synth>:0
 
 ## Examples
 
-Examples for both languages live in [`examples/scheme/`](./examples/scheme) and [`examples/lua/`](./examples/lua). Run one with `cargo run -- examples/scheme/<name>.scm` (or `examples/lua/<name>.lua`), then press **Enter** on an empty line to start the tick loop and **Space** to stop it.
+Examples for both languages live in [`scm/`](./scm) and [`lua/`](./lua). Run one with `cargo run -- scm/<name>.scm` (or `lua/<name>.lua`), then press **Enter** on an empty line to start the tick loop and **Space** to stop it.
 
 ## Dependencies
 

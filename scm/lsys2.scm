@@ -1,4 +1,4 @@
-(load "lib/scheme/lib.scm")
+(load "scm/lib/lib.scm")
 
 (define rset1 (list 
   (list "a") ; axiom always a list

@@ -1,6 +1,6 @@
--- Direct port of examples/scheme/mintek.scm (drum patterns + modal bass),
+-- Direct port of scm/mintek.scm (drum patterns + modal bass),
 -- using the Lua libs instead of inlined helpers.
-dofile("lib/lua/lib.lua")
+dofile("lua/lib/lib.lua")
 
 set_tick_speed(200)
 
