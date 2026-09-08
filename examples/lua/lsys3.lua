@@ -8,20 +8,20 @@ set_tick_speed(150)
 -- Same rewrite-set layout as lib/lua/lsystem.lua: index 1 = axiom, then
 -- rule pairs (symbol, replacement); "?" = unused rule.
 local rset = {
-  "a",           -- axiom
-  "a", "ab",     -- r1
-  "b", "a",      -- r2
-  "?", "?",      -- r3 (empty)
-  "?", "?",      -- r4 (empty)
+  "a",       -- axiom
+  "a", "ab", -- r1
+  "b", "a",  -- r2
+  "?", "?",  -- r3 (empty)
+  "?", "?",  -- r4 (empty)
 }
 
 local gens = lsystem(rset, 16)
-local lout = gens[#gens]  -- (last (lsystem rset 16))
+local lout = gens[#gens] -- (last (lsystem rset 16))
 
 print("LSYSTEM OUTPUT (FINAL GEN):")
 print(lout)
 
-local mode = 1  -- Dorian
+local mode = 1 -- Dorian
 
 local mela = string_split_space_line([[
 5 5 5 5 4 4 4 4
@@ -38,7 +38,7 @@ local melb = string_split_space_line([[
 -- Scheme keeps lout as a list of single-char strings; index the equivalent
 -- Lua string with sub(i, i).
 local function ref(str, i)
-  return str:sub((i % #str) + 1, (i % #str) + 1)  -- 0-based (modulo tt len)
+  return str:sub((i % #str) + 1, (i % #str) + 1) -- 0-based (modulo tt len)
 end
 
 local t = 0
@@ -58,7 +58,7 @@ function tickfn()
 
   local tt2 = math.floor(t / 32)
   local tt3 = math.floor(t / 2)
-  local v = ref(lout, tt2)
+  v = ref(lout, tt2)
   print("v2")
   print(v)
   if v == "a" then
@@ -68,7 +68,7 @@ function tickfn()
   end
 
   local tt4 = math.floor(t / 48)
-  local v = ref(lout, tt3)
+  v = ref(lout, tt3)
   print("v2")
   print(v)
   if v == "a" then
@@ -79,3 +79,4 @@ function tickfn()
 
   t = t + 1
 end
+
